@@ -14,8 +14,8 @@ class SongFactory
                 $songData['disc_number'],
                 $songData['duration_ms'],
                 $songData['explicit'],
-                //$songData['isrc'],
-                //$songData['spotify_url'],
+                $songData['external_ids']['isrc'],
+                $songData['external_urls']['spotify'],
                 $songData['href'],
                 $songData['id'],
                 $songData['is_local'],
@@ -25,7 +25,8 @@ class SongFactory
                 $songData['track_number'],
                 $songData['type'],
                 $songData['uri'],
-                //$songData['picture_link']
+                $songData['album']['images'][0]['url']
+
             );
            
             $songs[] = $song;
