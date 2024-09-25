@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la chanson{% endblock %}
+
+
+
+{% block body %}
+    <div class="show-page artist-details-wrapper">
+
+        <div class="artist-details-content">
+            <div class="artist-image">
+                <img src="{{ artist.getImageUrl() }}" alt="Album Image">
+            </div>
+            <div class="artist-info">
+                <h1>{{ artist.getName() }}</h1>
+                <p><strong>ID:</strong> {{ artist.getId() }}</p>
+                <p><strong>Popularité:</strong> {{ artist.getPopularity() }}</p>
+                <p><strong>Écouter sur Spotify:</strong> <a href="{{ artist.getSpotifyUrl() }}" target="_blank">Lien Spotify</a></p>
+            </div>
+        </div>
+
+        <div class="back-button">
+            <a href="{{ path('app_artist_index') }}" class="btn btn-primary">Retour à la liste des artistes</a>
+        </div>
+
+
+        <div class="recommendations-wrapper">
+            <h2>Musiques recommandées</h2>
+            <ul class="recommendations-list">
+                {% for recommandation in recommandations|slice(0, 5) %}
+
+                    <li class="recommendation-item">
+                        <a href="{{ path('app_song_show', {id: recommandation.getId()}) }}">
+                            <div class="recommendation-image">
+                                <img src="{{ imagesUrls[loop.index0] }}" alt="Album Image">
+                            </div>
+                            <div class="recommendation-info">
+                                <h3>{{ recommandation.getName() }}</h3>
+
+                                <p><strong>Popularité:</strong> {{ recommandation.getPopularity() }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}
+

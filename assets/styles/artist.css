@@ -1,0 +1,135 @@
+
+.index-page .artist-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.index-page .artist-item {
+    border: 1px solid #333;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #282828;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.index-page .artist-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.index-page .artist-item img {
+    max-width: 120px;
+    margin-right: 20px;
+    border-radius: 10px;
+}
+
+.index-page .artist-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #b3b3b3;
+    font-size: 1.1em;
+}
+
+.index-page .artist-item a {
+    color: #1db954;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.index-page .artist-item a:hover {
+    text-decoration: underline;
+}
+
+.index-page .artist-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.index-page .artist-name {
+    font-size: 1.5em;
+    margin: 0 0 45px;
+}
+
+.index-page .artist-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.index-page .artist-info p {
+    margin: 0 10px;
+    color: #b3b3b3;
+}
+
+.index-page .artist-spotify-url {
+    margin-top: 10px;
+}
+
+
+
+
+.show-page .artist-details-wrapper {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 20px;
+    background-color: #1DB954; /* Spotify Green */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #FFFFFF; /* White text */
+}
+
+.show-page .artist-details-wrapper h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #FFFFFF; /* White text */
+}
+
+.show-page .artist-details-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.show-page .artist-image {
+    flex: 1;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.show-page .artist-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.show-page .artist-info {
+    flex: 2;
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.show-page .artist-info p {
+    margin: 10px 0;
+    color: #FFFFFF; /* White text */
+}
+
+.show-page .artist-info p strong {
+    color: #1db954; /* Gold color for labels */
+}
+
+.show-page .artist-info a {
+    color: #FFFFFF; /* Gold color for links */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.show-page .artist-info a:hover {
+    text-decoration: underline;
+}

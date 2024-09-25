@@ -31,22 +31,22 @@
 
 
         <div class="recommendations-wrapper">
-            <h2>Chansons recommandées</h2>
+            <h2>Musiques recommandées</h2>
             <ul class="recommendations-list">
-                {% for recommendation in recommandations|slice(0, 5) %}
+                {% for recommandation in recommandations|slice(0, 5) %}
                     <li class="recommendation-item">
-                        <a href="{{ path('app_song_show', {id: recommendation.getId()}) }}">
+                        <a href="{{ path('app_song_show', {id: recommandation.getId()}) }}">
                             <div class="recommendation-image">
-                                <img src="{{ recommendation.getPictureLink() }}" alt="Album Image">
+                                <img src="{{ recommandation.getPictureLink() }}" alt="Album Image">
                             </div>
                             <div class="recommendation-info">
-                                <h3>{{ recommendation.getName() }}</h3>
+                                <h3>{{ recommandation.getName() }}</h3>
                                 <p><strong>Durée:</strong>
-                                    {% set minutes = (recommendation.getDurationMs() // 60000) %}
-                                    {% set seconds = ((recommendation.getDurationMs() % 60000) // 1000) %}
+                                    {% set minutes = (recommandation.getDurationMs() // 60000) %}
+                                    {% set seconds = ((recommandation.getDurationMs() % 60000) // 1000) %}
                                     {{ '%02d:%02d'|format(minutes, seconds) }}
                                 </p>
-                                <p><strong>Popularité:</strong> {{ recommendation.getPopularity() }}</p>
+                                <p><strong>Popularité:</strong> {{ recommandation.getPopularity() }}</p>
                             </div>
                         </a>
                     </li>

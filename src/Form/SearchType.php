@@ -16,7 +16,7 @@ class SearchType extends AbstractType
                 'label' => ' ',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Enter a track name',
+                    'placeholder' => 'Enter a track name or an artist name',
                     'class' => 'form-control w-100 me-3',
                 ],
             ])
