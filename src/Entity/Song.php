@@ -2,22 +2,56 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+#[ORM\Table(name: 'songs')]
 class Song
 {
-    private int $discNumber;
-    private int $durationMs;
-    private bool $explicit;
-    private string $isrc;
-    private string $spotifyUrl;
-    private string $href;
+    #[ORM\Id]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $id;
+
+    #[ORM\Column(type: 'integer')]
+    private int $discNumber;
+
+    #[ORM\Column(type: 'integer')]
+    private int $durationMs;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $explicit;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $isrc;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $spotifyUrl;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private string $href;
+
+    #[ORM\Column(type: 'boolean')]
     private bool $isLocal;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $name;
-    private int $popularity;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private ?int $popularity;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $previewUrl;
+
+    #[ORM\Column(type: 'integer')]
     private int $trackNumber;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $type;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private string $uri;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $pictureLink;
 
     public function __construct(
@@ -30,7 +64,7 @@ class Song
         string $id,
         bool $isLocal,
         string $name,
-        int $popularity,
+        ?int $popularity,
         ?string $previewUrl,
         int $trackNumber,
         string $type,
@@ -54,10 +88,24 @@ class Song
         $this->pictureLink = $pictureLink;
     }
 
-    // Getters for all properties
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getDiscNumber(): int
     {
         return $this->discNumber;
+    }
+
+    public function setDiscNumber(int $discNumber): void
+    {
+        $this->discNumber = $discNumber;
     }
 
     public function getDurationMs(): int
@@ -65,9 +113,19 @@ class Song
         return $this->durationMs;
     }
 
+    public function setDurationMs(int $durationMs): void
+    {
+        $this->durationMs = $durationMs;
+    }
+
     public function isExplicit(): bool
     {
         return $this->explicit;
+    }
+
+    public function setExplicit(bool $explicit): void
+    {
+        $this->explicit = $explicit;
     }
 
     public function getIsrc(): string
@@ -75,9 +133,19 @@ class Song
         return $this->isrc;
     }
 
+    public function setIsrc(string $isrc): void
+    {
+        $this->isrc = $isrc;
+    }
+
     public function getSpotifyUrl(): string
     {
         return $this->spotifyUrl;
+    }
+
+    public function setSpotifyUrl(string $spotifyUrl): void
+    {
+        $this->spotifyUrl = $spotifyUrl;
     }
 
     public function getHref(): string
@@ -85,9 +153,9 @@ class Song
         return $this->href;
     }
 
-    public function getId(): string
+    public function setHref(string $href): void
     {
-        return $this->id;
+        $this->href = $href;
     }
 
     public function isLocal(): bool
@@ -95,14 +163,29 @@ class Song
         return $this->isLocal;
     }
 
+    public function setIsLocal(bool $isLocal): void
+    {
+        $this->isLocal = $isLocal;
+    }
+
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function getPopularity(): int
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getPopularity(): ?int
     {
         return $this->popularity;
+    }
+
+    public function setPopularity(?int $popularity): void
+    {
+        $this->popularity = $popularity;
     }
 
     public function getPreviewUrl(): ?string
@@ -110,9 +193,19 @@ class Song
         return $this->previewUrl;
     }
 
+    public function setPreviewUrl(?string $previewUrl): void
+    {
+        $this->previewUrl = $previewUrl;
+    }
+
     public function getTrackNumber(): int
     {
         return $this->trackNumber;
+    }
+
+    public function setTrackNumber(int $trackNumber): void
+    {
+        $this->trackNumber = $trackNumber;
     }
 
     public function getType(): string
@@ -120,14 +213,29 @@ class Song
         return $this->type;
     }
 
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
     public function getUri(): string
     {
         return $this->uri;
     }
 
-    public function getPictureLink(): string
+    public function setUri(string $uri): void
+    {
+        $this->uri = $uri;
+    }
+
+    public function getPictureLink(): ?string
     {
         return $this->pictureLink;
+    }
+
+    public function setPictureLink(?string $pictureLink): void
+    {
+        $this->pictureLink = $pictureLink;
     }
 
 
