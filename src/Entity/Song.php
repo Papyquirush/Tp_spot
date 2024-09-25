@@ -24,8 +24,8 @@ class Song
         int $discNumber,
         int $durationMs,
         bool $explicit,
-        string $isrc,
-        string $spotifyUrl,
+       // string $isrc,
+       // string $spotifyUrl,
         string $href,
         string $id,
         bool $isLocal,
@@ -35,13 +35,13 @@ class Song
         int $trackNumber,
         string $type,
         string $uri,
-        ?string $pictureLink
+       // ?string $pictureLink
     ) {
         $this->discNumber = $discNumber;
         $this->durationMs = $durationMs;
         $this->explicit = $explicit;
-        $this->isrc = $isrc;
-        $this->spotifyUrl = $spotifyUrl;
+       // $this->isrc = $isrc;
+       // $this->spotifyUrl = $spotifyUrl;
         $this->href = $href;
         $this->id = $id;
         $this->isLocal = $isLocal;
@@ -51,7 +51,7 @@ class Song
         $this->trackNumber = $trackNumber;
         $this->type = $type;
         $this->uri = $uri;
-        $this->pictureLink = $pictureLink;
+        //$this->pictureLink = $pictureLink;
     }
 
     // Getters for all properties
@@ -129,4 +129,6 @@ class Song
     {
         return $this->pictureLink;
     }
+
+
 }

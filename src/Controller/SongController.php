@@ -17,10 +17,11 @@ class SongController extends AbstractController
 
     public function __construct(private readonly SpotifyService  $SpotifyService,
                                 private readonly HttpClientInterface $httpClient,
-//                                private readonly TrackFactory         $trackFactory
+                                private readonly SongFactory $songFactory,
     )
     {
         $this->token = $this->SpotifyService->auth();
+        
     }
 
     #[Route('/song', name: 'app_song_index')]
@@ -32,11 +33,14 @@ class SongController extends AbstractController
                 'Authorization' => 'Bearer ' . $this->token,
             ],
         ]);
-// Examples of how you could do this
-//        $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
+        
+        // Examples of how you could do this
+        //        $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
+
+        $songs = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
 
         return $this->render('song/index.html.twig', [
             'songs' => $songs,
         ]);
+        }
     }
-}
