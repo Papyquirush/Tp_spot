@@ -10,6 +10,9 @@ class SongFactory
     {
         $songs = [];
         foreach ($data as $songData) {
+
+            $previewUrl = $data['preview_url'] ?? null;
+
             $song = new Song(
                 $songData['disc_number'],
                 $songData['duration_ms'],
@@ -21,7 +24,7 @@ class SongFactory
                 $songData['is_local'],
                 $songData['name'],
                 $songData['popularity'],
-                $songData['preview_url'],
+                $previewUrl,
                 $songData['track_number'],
                 $songData['type'],
                 $songData['uri'],
@@ -37,6 +40,8 @@ class SongFactory
 
     public function createSingleFromSpotifyData(array $data)
     {
+
+        $previewUrl = $data['preview_url'] ?? null;
         return new Song(
             $data['disc_number'],
             $data['duration_ms'],
@@ -48,7 +53,7 @@ class SongFactory
             $data['is_local'],
             $data['name'],
             $data['popularity'],
-            $data['preview_url'],
+            $previewUrl,
             $data['track_number'],
             $data['type'],
             $data['uri'],
