@@ -13,7 +13,7 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('search', TextType::class, [
-                'label' => 'Search for a track',
+                'label' => ' ',
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Enter a track name',

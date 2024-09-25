@@ -33,4 +33,28 @@ class SongFactory
         }
         return $songs;
     }
+
+
+    public function createSingleFromSpotifyData(array $data)
+    {
+        return new Song(
+            $data['disc_number'],
+            $data['duration_ms'],
+            $data['explicit'],
+            $data['external_ids']['isrc'],
+            $data['external_urls']['spotify'],
+            $data['href'],
+            $data['id'],
+            $data['is_local'],
+            $data['name'],
+            $data['popularity'],
+            $data['preview_url'],
+            $data['track_number'],
+            $data['type'],
+            $data['uri'],
+            $data['album']['images'][0]['url']
+        );
+    }
+
+
 }

@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des chansons{% endblock %}
-
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('/styles/song.css') }}">
+{% block title %}
+    Liste des chansons
 {% endblock %}
 
+
 {% block body %}
-    <div class="example-wrapper">
-        {{form_start(form)}}
-        {{ form_row(form.search) }}
-        {{ form_row(form.save) }}
+    <div class="index-page example-wrapper">
+        {{ form_start(form, {'attr': {'class': 'form-inline mb-4'}}) }}
+        <div class="form-group">
+            {{ form_row(form.search) }}
+        </div>
+        <div class="form-group">
+            {{ form_row(form.save) }}
+        </div>
         {{ form_end(form) }}
 
         <h1>Liste des Sons</h1>
@@ -18,26 +21,27 @@
         <ul class="song-list">
             {% for song in songs %}
                 <li class="song-item">
-                    <div class="song-image">
-                        <img src="{{ song.getPictureLink() }}" alt="Album Image">
-                    </div>
-                    <div class="song-details">
-                        <h2 class="song-name">{{ song.getName() }}</h2>
-                        <div class="song-info">
-                            <p class="song-duration">
-                                {% set minutes = (song.getDurationMs() // 60000) %}
-                                {% set seconds = ((song.getDurationMs() % 60000) // 1000) %}
-                                {{ '%02d:%02d'|format(minutes, seconds) }}
-                            </p>
-                            <p class="song-explicit">{{ song.isExplicit() ? 'Explicite' : 'Non explicite' }}</p>
-                            <p class="song-popularity">Popularité: {{ song.getPopularity() }}</p>
-                            <p class="song-track-number">Numéro de piste: {{ song.getTrackNumber() }}</p>
-                            <p class="song-spotify-url">
-                                <a href="{{ song.getSpotifyUrl() }}" target="_blank">Écouter sur Spotify</a>
-                            </p>
+                    <a href="{{ path('app_song_show',{id : song.getId()}) }}">
+                        <div class="song-image">
+                            <img src="{{ song.getPictureLink() }}" alt="Album Image">
                         </div>
-
-                    </div>
+                        <div class="song-details">
+                            <h2 class="song-name">{{ song.getName() }}</h2>
+                            <div class="song-info">
+                                <p class="song-duration">
+                                    {% set minutes = (song.getDurationMs() // 60000) %}
+                                    {% set seconds = ((song.getDurationMs() % 60000) // 1000) %}
+                                    {{ '%02d:%02d'|format(minutes, seconds) }}
+                                </p>
+                                <p class="song-explicit">{{ song.isExplicit() ? 'Explicite' : 'Non explicite' }}</p>
+                                <p class="song-popularity">Popularité: {{ song.getPopularity() }}</p>
+                                <p class="song-track-number">Numéro de piste: {{ song.getTrackNumber() }}</p>
+                                <p class="song-spotify-url">
+                                    <a href="{{ song.getSpotifyUrl() }}" target="_blank">Écouter sur Spotify</a>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
                 </li>
             {% endfor %}
         </ul>

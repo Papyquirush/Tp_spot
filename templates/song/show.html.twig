@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la chanson{% endblock %}
+
+
+
+{% block body %}
+    <div class="show-page song-details-wrapper">
+
+        <div class="song-details-content">
+            <div class="song-image">
+                <img src="{{ song.getPictureLink() }}" alt="Album Image">
+            </div>
+            <div class="song-info">
+                <h1>{{ song.getName() }}</h1>
+                <p><strong>Durée:</strong>
+                    {% set minutes = (song.getDurationMs() // 60000) %}
+                    {% set seconds = ((song.getDurationMs() % 60000) // 1000) %}
+                    {{ '%02d:%02d'|format(minutes, seconds) }}
+                </p>
+                <p><strong>Explicite:</strong> {{ song.isExplicit() ? 'Oui' : 'Non' }}</p>
+                <p><strong>Popularité:</strong> {{ song.getPopularity() }}</p>
+                <p><strong>Numéro de piste:</strong> {{ song.getTrackNumber() }}</p>
+                <p><strong>Écouter sur Spotify:</strong> <a href="{{ song.getSpotifyUrl() }}" target="_blank">Lien Spotify</a></p>
+            </div>
+        </div>
+
+        <div class="back-button">
+            <a href="{{ path('app_song_index') }}" class="btn btn-primary">Retour à la liste des chansons</a>
+        </div>
+
+
+        <div class="recommendations-wrapper">
+            <h2>Chansons recommandées</h2>
+            <ul class="recommendations-list">
+                {% for recommendation in recommandations|slice(0, 5) %}
+                    <li class="recommendation-item">
+                        <a href="{{ path('app_song_show', {id: recommendation.getId()}) }}">
+                            <div class="recommendation-image">
+                                <img src="{{ recommendation.getPictureLink() }}" alt="Album Image">
+                            </div>
+                            <div class="recommendation-info">
+                                <h3>{{ recommendation.getName() }}</h3>
+                                <p><strong>Durée:</strong>
+                                    {% set minutes = (recommendation.getDurationMs() // 60000) %}
+                                    {% set seconds = ((recommendation.getDurationMs() % 60000) // 1000) %}
+                                    {{ '%02d:%02d'|format(minutes, seconds) }}
+                                </p>
+                                <p><strong>Popularité:</strong> {{ recommendation.getPopularity() }}</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

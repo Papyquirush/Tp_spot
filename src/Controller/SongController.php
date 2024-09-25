@@ -37,10 +37,9 @@ class SongController extends AbstractController
         $form->handleRequest($request);
 
         $songs = [];
-         dump($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+
             $searchQuery = $form->getData()['search'];
             $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search', [
                 'headers' => [
@@ -56,7 +55,7 @@ class SongController extends AbstractController
             $songs = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
 
         }
-        dump($songs);
+
 
 
         return $this->render('song/index.html.twig', [
@@ -64,4 +63,44 @@ class SongController extends AbstractController
             'form' => $form->createView(),
         ]);
         }
+
+
+
+        #[Route('/song/{id}', name: 'app_song_show')]
+        public function show(string $id): Response
+        {
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                ],
+            ]);
+
+            $song = $this->songFactory->createSingleFromSpotifyData($response->toArray());
+
+
+
+            $recommandations = [];
+
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/recommendations', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                ],
+                'query' => [
+                    'seed_tracks' => $id,
+                ],
+            ]);
+
+            $recommandations = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']);
+
+
+
+
+            return $this->render('song/show.html.twig', [
+                'song' => $song,
+                'recommandations' => $recommandations,
+            ]);
+        }
+
     }
+
+
