@@ -2,58 +2,41 @@
 
 namespace App\Controller;
 
-use SpotifyService;
+use App\Factory\SongFactory;
+use App\Service\SpotifyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use App\Service\SongFactory;
-
-
 
 class SongController extends AbstractController
 {
-private SessionInterface $session;
 
-    public function __construct(private readonly SpotifyService $spotifyService, 
+    private string $token;
+
+
+    public function __construct(private readonly SpotifyService  $SpotifyService,
                                 private readonly HttpClientInterface $httpClient,
-                                private readonly RequestStack $requestStack,
-                                private readonly SongFactory $songFactory
+//                                private readonly TrackFactory         $trackFactory
     )
     {
-        $this->spotifyService->auth();
-        $this->session= $this->requestStack->getSession();
+        $this->token = $this->SpotifyService->auth();
     }
-    
 
-    #[Route('/song', name: 'app_song')]
+    #[Route('/song', name: 'app_song_index')]
     public function index(): Response
     {
-        
-        $response = $this->httpClient->request('GET','https://api.spotify.com/vl/search?querry=papyquirush&type=track&locale=fr-FR',[
-            'headers' =>[
-                'Authorization' => 'Bearer ' .$this->session->get('token'),
+        // Make the GET request to the Spotify API with kazzey as the query and the token as the Authorization header
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search?query=kazzey&type=track&locale=fr-FR', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->token,
             ],
-        ] );
-
-        $songs = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items'] );
-
+        ]);
+// Examples of how you could do this
+//        $tracks = $this->trackFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
 
         return $this->render('song/index.html.twig', [
             'songs' => $songs,
         ]);
     }
-
-
-
-    
-
-    
-
-
-
-
-
 }
