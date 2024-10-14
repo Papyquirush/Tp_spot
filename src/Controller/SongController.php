@@ -18,9 +18,11 @@ class SongController extends AbstractController
     private string $token;
 
 
+
     public function __construct(private readonly SpotifyService      $SpotifyService,
                                 private readonly HttpClientInterface $httpClient,
                                 private readonly SongFactory         $songFactory,
+
 
     )
     {
@@ -100,6 +102,13 @@ class SongController extends AbstractController
                 'recommandations' => $recommandations,
             ]);
         }
+
+
+
+
+
+
+
 
     }
 
