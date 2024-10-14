@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.navigation {
+    width: 200px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh; /* Full height */
+    position: fixed; /* Fixed position */
+}
+
+.navigation nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation nav ul li {
+    margin-bottom: 10px;
+}
+
+.navigation nav ul li a {
+    color: #1DB954; /* Spotify Green */
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation nav ul li a:hover {
+    background-color: #1ed760;
+}
+
+main {
+    flex-grow: 1;
+
+    margin-left: 220px;
+}

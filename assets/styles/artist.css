@@ -1,7 +1,55 @@
+.index-page {
+    width: 95%;
+    margin-left: auto;
+    background: #1e1e1e;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 
+
+}
+
+.index-page h1 {
+    text-align: center;
+    color: #1db954;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
 .index-page .artist-list {
     list-style-type: none;
     padding: 0;
+}
+.index-page .form-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.index-page .form-group {
+    margin-right: 10px;
+}
+
+.index-page .form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+}
+
+.index-page .btn-primary {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.index-page .btn-primary:hover {
+    background-color: #0056b3;
 }
 
 .index-page .artist-item {
@@ -154,4 +202,77 @@
 
 .show-page .back-button .btn:hover {
     background-color: #0056b3;
+}
+
+.recommendations-wrapper {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #282828;
+    border-radius: 8px;
+}
+
+.recommendations-wrapper h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #1DB954; /* Spotify Green */
+}
+
+.recommendations-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.recommendation-item {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recommendation-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.recommendation-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.recommendation-info h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #FFFFFF; /* White text */
+}
+
+.recommendation-info p {
+    margin: 5px 0;
+    color: #b3b3b3;
+}
+
+
+.favorite-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff!important;
+    background-color: #1db954; /* Spotify Green */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.favorite-button:hover {
+    background-color: #1ed760; /* Lighter green on hover */
 }

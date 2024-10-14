@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Factory\SongFactory;
 use App\Service\SpotifyService;
 use App\Form\SearchType;
@@ -104,29 +105,53 @@ class SongController extends AbstractController
     #[Route('/song/add/{id}', name: 'app_song_add')]
     public function add(string $id): Response
     {
-        $existingSong = $this->entityManager->getRepository(Song::class)->find($id);
-        if($existingSong){
-            $this->entityManager->remove($existingSong);
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('You must be logged in to add a song.');
+        }
+
+        $song = $this->entityManager->getRepository(Song::class)->find($id);
+        if (!$song) {
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                ],
+            ]);
+
+            $songData = $response->toArray();
+            $song = $this->songFactory->createSingleFromSpotifyData($songData);
+
+            $this->entityManager->persist($song);
             $this->entityManager->flush();
         }
 
-
-        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/tracks/' . $id, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $this->token,
-            ],
-        ]);
-
-        $songData = $response->toArray();
-        $song = $this->songFactory->createSingleFromSpotifyData($songData);
-
-
-        $this->entityManager->persist($song);
+        $user->addSong($song);
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('app_song_show', ['id' => $song->getId()]);
+        return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
+    }
 
+    #[Route('/song/remove/{id}', name: 'app_song_remove')]
+    public function remove(string $id): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('You must be logged in to remove a song.');
+        }
 
+        $song = $this->entityManager->getRepository(Song::class)->find($id);
+        if (!$song) {
+            throw $this->createNotFoundException('Song not found.');
+        }
+
+        if ($user->getSongs()->contains($song)) {
+            $user->removeSong($song);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
     }
 }
 

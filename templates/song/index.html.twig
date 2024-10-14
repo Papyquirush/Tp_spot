@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/styles/song.css') }}">
+    <link rel="stylesheet" href="{{ asset('/styles/aside.css') }}">
+
+{% endblock %}
+
+
 {% block title %}
     Liste des chansons
 {% endblock %}

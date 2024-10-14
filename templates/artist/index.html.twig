@@ -1,5 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('/styles/artist.css') }}">
+    <link rel="stylesheet" href="{{ asset('/styles/aside.css') }}">
+
+{% endblock %}
+
+
 {% block title %}
     Liste des chansons
 {% endblock %}
@@ -35,6 +43,9 @@
                                 </p>
                             </div>
                         </div>
+                    </a>
+                    <a class="favorite-button" href="{{ path('app_artist_add',{id : artist.getId()}) }}">
+                        Ajouter aux favoris
                     </a>
                 </li>
             {% endfor %}

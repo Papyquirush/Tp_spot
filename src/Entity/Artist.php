@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -30,6 +32,12 @@ class Artist
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageUrl;
 
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $user;
+
     public function __construct(
         string $id,
         string $name,
@@ -46,6 +54,7 @@ class Artist
         $this->href = $href;
         $this->uri = $uri;
         $this->imageUrl = $imageUrl;
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): string
@@ -81,6 +90,30 @@ class Artist
     public function getImageUrl(): ?string
     {
         return $this->imageUrl;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->user->contains($user)) {
+            $this->user->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        $this->user->removeElement($user);
+
+        return $this;
     }
 
 

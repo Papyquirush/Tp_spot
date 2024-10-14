@@ -1,0 +1,91 @@
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+
+}
+
+.index-page {
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1DB954; /* Spotify Green */
+}
+
+.song-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.song-item {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 20px;
+    width: calc(20% - 20px);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    list-style-type: none;
+}
+
+.song-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.song-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.song-details {
+    margin-top: 10px;
+}
+
+.song-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #FFFFFF; /* White text */
+}
+
+.song-info p {
+    margin: 15px 0;
+    color: #b3b3b3;
+}
+
+.song-info a {
+    color: #1DB954; /* Spotify Green */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.song-info a:hover {
+    text-decoration: underline;
+}
+
+.favorite-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1db954;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.favorite-button:hover {
+    background-color: #1ed760;
+}

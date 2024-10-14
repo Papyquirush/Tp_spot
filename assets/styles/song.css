@@ -9,14 +9,14 @@ body {
 }
 
 /* Styles pour la page Liste des chansons */
-.index-page .example-wrapper {
-    margin: 2em auto;
-    max-width: 900px;
+.index-page  {
     width: 95%;
+    margin-left: auto;
     background: #1e1e1e;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+
+
 }
 
 .index-page h1 {
@@ -282,16 +282,20 @@ body {
     color: #b3b3b3;
 }
 
+
+
 .favorite-button {
     padding: 10px 20px;
     font-size: 16px;
-    color: #fff;
+    color: #fff!important;
     background-color: #1db954; /* Spotify Green */
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 10px;
+    text-align: center;
+    display: inline-block;
 }
 
 .favorite-button:hover {

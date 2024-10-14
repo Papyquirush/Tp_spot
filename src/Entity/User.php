@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -32,6 +34,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Song>
+     */
+    #[ORM\ManyToMany(targetEntity: Song::class)]
+    private Collection $song;
+
+    /**
+     * @var Collection<int, Artist>
+     */
+    #[ORM\ManyToMany(targetEntity: Artist::class)]
+    private Collection $artist;
+
+    public function __construct()
+    {
+        $this->song = new ArrayCollection();
+        $this->artist = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,4 +127,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the login, clear it here
         // $this->plainPassword = null;
     }
+
+    /**
+     * @return Collection<int, Song>
+     */
+    public function getSong(): Collection
+    {
+        return $this->song;
+    }
+
+    public function addSong(Song $song): static
+    {
+        if (!$this->song->contains($song)) {
+            $this->song->add($song);
+        }
+
+        return $this;
+    }
+
+    public function removeSong(Song $song): static
+    {
+        $this->song->removeElement($song);
+
+        return $this;
+    }
+
+
+    public function getSongs(): Collection
+    {
+        return $this->song;
+    }
+
+    /**
+     * @return Collection<int, Artist>
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artist;
+    }
+
+    public function addArtist(Artist $artist): static
+    {
+        if (!$this->artist->contains($artist)) {
+            $this->artist->add($artist);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): static
+    {
+        $this->artist->removeElement($artist);
+
+        return $this;
+    }
+
+
 }

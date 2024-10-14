@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('/styles/aside.css') }}">
     <link rel="stylesheet" href="{{ asset('styles/login.css') }}">
 {% endblock %}
 
@@ -8,7 +9,7 @@
 
 {% block body %}
     <div class="container">
-        <form method="post">
+        <form id="login-form" action="{{ path('app_login') }}" method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
@@ -31,16 +32,22 @@
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-
-            <div class="button-group">
-                <a href="{{ path('app_artist_index') }}" class="btn btn-secondary">Artistes</a>
-                <a href="{{ path('app_song_index') }}" class="btn btn-secondary">Sons</a>
-                <a href="{{ path('app_favorite_user') }}" class="btn btn-secondary">Favoris</a>
-            </div>
+            <button id="login-button" class="btn btn-lg btn-primary" type="button">Sign in</button>
         </form>
+
         <div class="register-link">
             <p>Don't have an account? <a href="{{ path('app_register') }}">Register here</a></p>
         </div>
     </div>
+
+    <script>
+        document.getElementById('login-button').addEventListener('click', function() {
+            var form = document.getElementById('login-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                window.location.href = '/song';
+            });
+            form.submit();
+        });
+    </script>
 {% endblock %}

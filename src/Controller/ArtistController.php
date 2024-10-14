@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Artist;
 use App\Factory\ArtistFactory;
 use App\Service\SpotifyService;
 use App\Form\SearchType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +22,7 @@ class ArtistController extends AbstractController
     public function __construct(private readonly SpotifyService      $SpotifyService,
                                 private readonly HttpClientInterface $httpClient,
                                 private readonly ArtistFactory       $artistFactory,
+                                private readonly EntityManagerInterface $entityManager,
 
     )
     {
@@ -105,6 +108,37 @@ class ArtistController extends AbstractController
             'imagesUrls' => $imagesUrls,
         ]);
     }
+
+    #[Route('/artist/add/{id}', name: 'app_artist_add')]
+    public function add(string $id): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('You must be logged in to add a artist.');
+        }
+
+        $artist = $this->entityManager->getRepository(Artist::class)->find($id);
+        if (!$artist) {
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/artists/' . $id, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                ],
+            ]);
+
+            $artistData = $response->toArray();
+            $artist = $this->artistFactory->createSingleFromSpotifyData($artistData);
+
+            $this->entityManager->persist($artist);
+            $this->entityManager->flush();
+        }
+
+        $user->addArtist($artist);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
+    }
+
 
 
 
