@@ -42,6 +42,9 @@
                             </div>
                         </div>
                     </a>
+                    <a class="favorite-button" href="{{ path('app_song_add',{id : song.getId()}) }}">
+                        Ajouter aux favoris
+                    </a>
                 </li>
             {% endfor %}
         </ul>
