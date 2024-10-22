@@ -15,7 +15,7 @@ body {
 h1 {
     text-align: center;
     margin-bottom: 20px;
-    color: #1DB954; /* Spotify Green */
+    color: #1DB954;
 }
 
 .song-list {
@@ -58,7 +58,7 @@ h1 {
 .song-name {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF;
 }
 
 .song-info p {
@@ -67,7 +67,7 @@ h1 {
 }
 
 .song-info a {
-    color: #1DB954; /* Spotify Green */
+    color: #1DB954;
     text-decoration: none;
     font-weight: bold;
 }

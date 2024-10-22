@@ -103,11 +103,7 @@
     margin: 0 0 45px;
 }
 
-.index-page .artist-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
+
 
 .index-page .artist-info p {
     margin: 0 10px;
@@ -123,7 +119,7 @@
     max-width: 800px;
     margin: 2em auto;
     padding: 20px;
-    background-color: #1DB954; /* Spotify Green */
+    background-color: #1DB954;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     color: #FFFFFF; /* White text */
@@ -136,7 +132,7 @@
 
 .show-page .artist-header h1 {
     font-size: 2.5em;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF;
 }
 
 .show-page .artist-details-content {
@@ -166,7 +162,7 @@
 
 .show-page .artist-info p {
     margin: 10px 0;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF;
 }
 
 .show-page .artist-info p strong {
@@ -215,7 +211,7 @@
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
-    color: #1DB954; /* Spotify Green */
+    color: #1DB954;
 }
 
 .recommendations-list {
@@ -250,7 +246,7 @@
 .recommendation-info h3 {
     font-size: 1.2em;
     margin: 10px 0;
-    color: #FFFFFF; /* White text */
+    color: #FFFFFF;
 }
 
 .recommendation-info p {
@@ -263,7 +259,7 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #fff!important;
-    background-color: #1db954; /* Spotify Green */
+    background-color: #1db954;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -274,5 +270,5 @@
 }
 
 .favorite-button:hover {
-    background-color: #1ed760; /* Lighter green on hover */
+    background-color: #1ed760;
 }

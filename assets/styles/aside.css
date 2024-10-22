@@ -13,7 +13,7 @@ body {
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     height: 100vh; /* Full height */
-    position: fixed; /* Fixed position */
+    position: fixed;
 }
 
 .navigation nav ul {
@@ -26,13 +26,14 @@ body {
 }
 
 .navigation nav ul li a {
-    color: #1DB954; /* Spotify Green */
+    color: #1DB954;
     text-decoration: none;
     font-weight: bold;
     display: block;
     padding: 10px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    text-align: center;
 }
 
 .navigation nav ul li a:hover {
@@ -55,5 +56,10 @@ main {
 
 
 #logo {
-    width: 80%;
+    width: 100%;
+}
+
+.user-name {
+    font-size: 1.2em;
+    text-align: center;
 }

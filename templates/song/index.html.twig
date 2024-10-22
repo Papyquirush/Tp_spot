@@ -49,9 +49,19 @@
                             </div>
                         </div>
                     </a>
+                    {% if song.getId() in favoriteSongs %}
+
+
+                    <a class="favorite-button" href="{{ path('app_song_remove',{id : song.getId()}) }}">
+                        Retirer des favoris
+                    </a>
+                    {% else %}
+
                     <a class="favorite-button" href="{{ path('app_song_add',{id : song.getId()}) }}">
                         Ajouter aux favoris
                     </a>
+                    {% endif %}
+
                 </li>
             {% endfor %}
         </ul>

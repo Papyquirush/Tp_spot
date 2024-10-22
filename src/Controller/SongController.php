@@ -61,10 +61,20 @@ class SongController extends AbstractController
 
         }
 
+        $user = $this->getUser();
+        $favoriteSongs = [];
+        if ($user instanceof User) {
+            foreach ($songs as $song) {
+                if ($this->isFavorite($user, $song)) {
+                    $favoriteSongs[] = $song->getId();
+                }
+            }
+        }
 
         return $this->render('song/index.html.twig', [
             'songs' => $songs,
             'form' => $form->createView(),
+            'favoriteSongs' => $favoriteSongs,
         ]);
     }
 
@@ -82,6 +92,9 @@ class SongController extends AbstractController
 
 
         $recommandations = [];
+        $favoriteSongs = [];
+
+
 
         $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/recommendations', [
             'headers' => [
@@ -94,10 +107,20 @@ class SongController extends AbstractController
 
         $recommandations = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']);
 
+        $user = $this->getUser();
+        $favoriteSongs = [];
+        if ($user instanceof User) {
+
+            if ($this->isFavorite($user, $song)) {
+                $favoriteSongs[] = $song->getId();
+            }
+
+        }
 
         return $this->render('song/show.html.twig', [
             'song' => $song,
             'recommandations' => $recommandations,
+            'favoriteSongs' => $favoriteSongs,
         ]);
     }
 
@@ -152,6 +175,16 @@ class SongController extends AbstractController
         }
 
         return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
+    }
+
+    public function isFavorite(User $user, Song $song): bool
+    {
+        foreach ($user->getSongs() as $favoriteSong) {
+            if ($favoriteSong->getId() === $song->getId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

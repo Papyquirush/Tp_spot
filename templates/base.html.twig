@@ -19,7 +19,7 @@
             <img id="logo" src="{{  asset('img/Spotify-Symbole.png') }}" alt="Logo Spotify">
             <div class="user-info">
 
-                <p class="user-name">Connecté en tant que : {{ app.user.email }}</p>
+                <p class="user-name"> {{ app.user.email|split('@')[0] }}</p>
             </div>
             <nav>
                 <ul>

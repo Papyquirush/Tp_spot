@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Entity\Song;
 use App\Entity\User;
 use App\Factory\ArtistFactory;
 use App\Service\SpotifyService;
@@ -60,10 +61,22 @@ class ArtistController extends AbstractController
 
         }
 
+        $user = $this->getUser();
+        $favoriteArtist= [];
+        if ($user instanceof User) {
+            foreach ($artists as $artist) {
+                if ($this->isFavorite($user, $artist)) {
+                    $favoriteArtist[] = $artist->getId();
+                }
+            }
+        }
+
+
 
         return $this->render('artist/index.html.twig', [
             'artists' => $artists,
             'form' => $form->createView(),
+            'favoriteArtist' => $favoriteArtist,
         ]);
     }
 
@@ -163,6 +176,15 @@ class ArtistController extends AbstractController
         return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
     }
 
+    public function isFavorite(User $user, Artist $artist): bool
+    {
+        foreach ($user->getArtists() as $favoriteArtist) {
+            if ($favoriteArtist->getId() === $artist->getId()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 

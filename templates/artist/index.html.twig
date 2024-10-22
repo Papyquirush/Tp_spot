@@ -41,12 +41,21 @@
                                 <p class="artist-spotify-url">
                                     <a href="{{ artist.getSpotifyUrl() }}" target="_blank">Écouter sur Spotify</a>
                                 </p>
+
                             </div>
                         </div>
                     </a>
-                    <a class="favorite-button" href="{{ path('app_artist_add',{id : artist.getId()}) }}">
-                        Ajouter aux favoris
-                    </a>
+
+                    {% if artist.getId() in favoriteArtist %}
+                        <a class="favorite-button" href="{{ path('app_artist_remove',{id : artist.getId()}) }}">
+                            Retirer des favoris
+                        </a>
+                    {% else %}
+                        <a class="favorite-button" href="{{ path('app_artist_add',{id : artist.getId()}) }}">
+                            Ajouter aux favoris
+                        </a>
+                    {% endif %}
+
                 </li>
             {% endfor %}
         </ul>
