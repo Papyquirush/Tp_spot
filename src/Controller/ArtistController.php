@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
-use App\Entity\Song;
 use App\Entity\User;
 use App\Factory\ArtistFactory;
 use App\Service\SpotifyService;

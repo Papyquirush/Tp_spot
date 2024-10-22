@@ -42,14 +42,14 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #1db954;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .index-page .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #208d47;
 }
 
 .index-page .artist-item {
@@ -188,7 +188,7 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #1DB954;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -197,7 +197,7 @@
 }
 
 .show-page .back-button .btn:hover {
-    background-color: #0056b3;
+    background-color: #208d47;
 }
 
 .recommendations-wrapper {

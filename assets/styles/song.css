@@ -116,14 +116,14 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #1db954;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .index-page .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #208d47;
 }
 
 
@@ -208,7 +208,7 @@ body {
     padding: 10px 20px;
     font-size: 16px;
     color: #fff;
-    background-color: #007bff;
+    background-color: #1db954;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -217,7 +217,7 @@ body {
 }
 
 .show-page .back-button .btn:hover {
-    background-color: #0056b3;
+    background-color: #228648;
 }
 
 .recommendations-wrapper {
@@ -291,5 +291,5 @@ body {
 }
 
 .favorite-button:hover {
-    background-color: #1ed760;
+    background-color: #208d47;
 }
