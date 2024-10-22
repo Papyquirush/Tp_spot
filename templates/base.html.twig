@@ -16,6 +16,11 @@
     <body>
     {% if is_granted('IS_AUTHENTICATED_FULLY') and app.request.attributes.get('_route') not in ['app_login', 'app_register'] %}
         <aside class="navigation">
+            <img id="logo" src="{{  asset('img/Spotify-Symbole.png') }}" alt="Logo Spotify">
+            <div class="user-info">
+
+                <p class="user-name">Connecté en tant que : {{ app.user.email }}</p>
+            </div>
             <nav>
                 <ul>
                     <li><a href="{{ path('app_artist_index') }}">Artistes</a></li>

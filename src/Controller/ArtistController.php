@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Entity\User;
 use App\Factory\ArtistFactory;
 use App\Service\SpotifyService;
 use App\Form\SearchType;
@@ -140,7 +141,27 @@ class ArtistController extends AbstractController
     }
 
 
+    #[Route('/artist/remove/{id}', name: 'app_artist_remove')]
+    public function remove(string $id): Response
+    {
+        $user = $this->getUser();
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException('You must be logged in to remove a artist.');
+        }
 
+        $artist = $this->entityManager->getRepository(Artist::class)->find($id);
+        if (!$artist) {
+            throw $this->createNotFoundException('Artist not found.');
+        }
+
+        if ($user->getArtists()->contains($artist)) {
+            $user->removeSong($artist);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_favorite_user', ['id' => $user->getId()]);
+    }
 
 
 }

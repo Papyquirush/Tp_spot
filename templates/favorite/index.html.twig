@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Liste des Favoris{% endblock %}
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{{ asset('/styles/favorite.css') }}">
+    <link rel="stylesheet" href="{{ asset('/styles/aside.css') }}">
+
+{% endblock %}
+
+
+{% block body %}
+<div class="index-page">
+    <h1 >Liste des Sons Favoris</h1>
+    <ul class="song-list">
+        {% for song in songs %}
+            <li class="song-item">
+                <a href="{{ path('app_song_show',{id : song.getId()}) }}">
+                    <div class="song-image">
+                        <img src="{{ song.getPictureLink() }}" alt="Album Image">
+                    </div>
+                    <div class="song-details">
+                        <h2 class="song-name">{{ song.getName() }}</h2>
+                        <div class="song-info">
+                            <p class="song-duration">
+                                {% set minutes = (song.getDurationMs() // 60000) %}
+                                {% set seconds = ((song.getDurationMs() % 60000) // 1000) %}
+                                {{ '%02d:%02d'|format(minutes, seconds) }}
+                            </p>
+                            <p class="song-explicit">{{ song.isExplicit() ? 'Explicite' : 'Non explicite' }}</p>
+                            <p class="song-popularity">Popularité: {{ song.getPopularity() }}</p>
+                            <p class="song-track-number">Numéro de piste: {{ song.getTrackNumber() }}</p>
+                            <p class="song-spotify-url">
+                                <a href="{{ song.getSpotifyUrl() }}" target="_blank">Écouter sur Spotify</a>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a class="favorite-button" href="{{ path('app_song_remove', {id : song.getId()} )  }}">Retirer des favoris</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <h1 >Liste des Artistes Favoris</h1>
+    <ul class="song-list">
+        {% for artist in artists %}
+            <li class="song-item">
+                <a href="{{ path('app_artist_show',{id : artist.getId()}) }}">
+                    <div class="song-image">
+                        <img src="{{ artist.getImageUrl() }}" alt="Album Image">
+                    </div>
+                    <div class="song-details">
+                        <h2 class="song-name">{{ artist.getName() }}</h2>
+                        <div class="song-info">
+                            <p class="song-popularity">Popularité: {{ artist.getPopularity() }}</p>
+                            <p class="song-spotify-url">
+                                <a href="{{ artist.getSpotifyUrl() }}" target="_blank">Écouter sur Spotify</a>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a class="favorite-button" href="{{ path('app_artist_remove', {id : artist.getId()} )  }}">Retirer des favoris</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
