@@ -59,6 +59,14 @@ class ArtistController extends AbstractController
 
             $artists = $this->artistFactory->createMultipleFromSpotifyData($response->toArray()['artists']['items']);
 
+        }else {
+            $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search?query=kazzey&type=artist&locale=fr-FR', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                ],
+            ]);
+
+            $artists = $this->artistFactory->createMultipleFromSpotifyData($response->toArray()['artists']['items']);
         }
 
         $user = $this->getUser();

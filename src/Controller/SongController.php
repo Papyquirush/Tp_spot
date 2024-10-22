@@ -59,7 +59,16 @@ class SongController extends AbstractController
 
             $songs = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
 
-        }
+        }else {
+        $response = $this->httpClient->request('GET', 'https://api.spotify.com/v1/search?query=kazzey&type=track&locale=fr-FR', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $this->token,
+            ],
+        ]);
+
+        $songs = $this->songFactory->createMultipleFromSpotifyData($response->toArray()['tracks']['items']);
+         }
+
 
         $user = $this->getUser();
         $favoriteSongs = [];
