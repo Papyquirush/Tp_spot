@@ -69,7 +69,7 @@ class ArtistController extends AbstractController
         }
 
         $user = $this->getUser();
-        $favoriteArtist= [];
+        $favoriteArtist = [];
         if ($user instanceof User) {
             foreach ($artists as $artist) {
                 if ($this->isFavorite($user, $artist)) {
@@ -175,7 +175,7 @@ class ArtistController extends AbstractController
         }
 
         if ($user->getArtists()->contains($artist)) {
-            $user->removeSong($artist);
+            $user->removeArtist($artist);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
         }
